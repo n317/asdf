@@ -19,6 +19,8 @@ async function start() {
     const client = new MongoClient("mongodb+srv://n31751740:1oK8a9PnWanyKIkO@cluster0.jbxun29.mongodb.net/AmazingMernApp?retryWrites=true&w=majority")
     await client.connect()
     db = client.db()
-    app.listen(3000)
+    app.listen(PORT, '0.0.0.0', () => {
+        console.log(`Server Started at Port ${PORT}`)
+     })
 }
 start()
