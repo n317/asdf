@@ -5,22 +5,29 @@ let db
 const app = express()
 app.set("view engine", "ejs")
 app.set("views", "./views")
+app.use(express.static("public"))
 
 app.get("/", async (req, res) => {
     const allAnimals = await db.collection("animals").find().toArray()
-    res.send(`<h1>Welcome to the homepage</h1> ${allAnimals.map(animal => `<p>${animal.name} - ${animal.species}</p>`).join('')}`)
+    //console.log(allAnimals)
+    //res.send(`<h1>Welcome to the homepage</h1> ${allAnimals.map(animal => `<p>${animal.name} - ${animal.species}</p>`).join('')}`)
+    res.render("home", { allAnimals })
 })
 
 app.get("/admin", (req,res) => {
-    res.send("this is the admin")
+    //res.send("This is the top secret admin page")
+    res.render("admin")
+})
+
+app.get("/api/animals", async (req, res) => {
+    const allAnimals = await db.collection("animals").find().toArray()
+    res.json(allAnimals)
 })
 
 async function start() {
     const client = new MongoClient("mongodb+srv://n31751740:1oK8a9PnWanyKIkO@cluster0.jbxun29.mongodb.net/AmazingMernApp?retryWrites=true&w=majority")
     await client.connect()
     db = client.db()
-    app.listen(PORT, '0.0.0.0', () => {
-        console.log(`Server Started at Port ${PORT}`)
-     })
+    app.listen(3000)
 }
 start()

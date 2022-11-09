@@ -1,17 +1,32 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { useState, useEffect } from 'react';
+import {createRoot} from "react-dom/client"
+import Axios from "axios"
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <server />
-  </React.StrictMode>
-);
+function App() {
+  const [animals, setAnimals] = useState([])
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  useEffect(() => {
+    async function go() {
+      const response = await Axios.get("/api/animals")
+      setAnimals(response.data)
+    }
+    go()
+  }, [])
+
+  return (
+    <div>
+         <h1>Hello</h1>
+         <p>Hey, this is from React.</p>
+         {animals.map(function(animal) {
+          return <AnimaCard name={animal.name} species={animal.species} />
+         })}
+    </div>
+  )
+}
+
+function AnimaCard(props) {
+  return <p>Hi, my name is {props.name} and I am a {props.species}.</p>
+}
+
+const root = createRoot(document.querySelector("#app"))
+root.render(<App />)
