@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {createRoot} from "react-dom/client"
 import Axios from "axios"
+import CreateNewForm from "./components/CreateNewForm"
+import AnimalCard from "./components/AnimalCard"
 
 function App() {
   const [animals, setAnimals] = useState([])
@@ -14,11 +16,12 @@ function App() {
   }, [])
 
   return (
-    <div>
-         <h1>Hello</h1>
-         <p>Hey, this is from React.</p>
+    <div className="container">
+         <p><a href="/">&laquo; Back to public</a></p>
+         <CreateNewForm setAnimals={setAnimals}/>
+         <div className="animal-grid"></div>
          {animals.map(function(animal) {
-          return <AnimaCard name={animal.name} species={animal.species} />
+          return <AnimaCard key={animal.id} name={animal.name} species={animal.species} />
          })}
     </div>
   )
