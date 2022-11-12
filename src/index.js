@@ -17,18 +17,17 @@ function App() {
 
   return (
     <div className="container">
-         <p><a href="/">&laquo; Back to public</a></p>
+        <p>
+          <a href="/">&laquo; Back to public</a>
+        </p>
          <CreateNewForm setAnimals={setAnimals}/>
-         <div className="animal-grid"></div>
+         <div className="animal-grid">
          {animals.map(function(animal) {
-          return <AnimaCard key={animal.id} name={animal.name} species={animal.species} photo={animal.photo} id={animal._id} setAnimals={setAnimals}/>
+          return <AnimalCard key={animal._id} name={animal.name} species={animal.species} photo={animal.photo} id={animal._id} setAnimals={setAnimals}/>
          })}
+      </div>
     </div>
   )
-}
-
-function AnimaCard(props) {
-  return <p>Hi, my name is {props.name} and I am a {props.species}.</p>
 }
 
 const root = createRoot(document.querySelector("#app"))
