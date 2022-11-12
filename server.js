@@ -25,6 +25,7 @@ app.get("/api/animals", async (req, res) => {
 })
 
 async function start() {
+    const client = new MongoClient("mongodb+srv://n31751740:7Iwgndprcd4JbOSG@cluster0.jbxun29.mongodb.net/AmazingMernApp?retryWrites=true&w=majority")
     await client.connect()
     db = client.db()
     app.listen(3000)
