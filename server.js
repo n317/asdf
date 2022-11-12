@@ -9,7 +9,7 @@ app.use(express.static("public"))
 
 app.get("/", async (req, res) => {
     const allAnimals = await db.collection("animals").find().toArray()
-    //console.log(allAnimals)
+    console.log(allAnimals)
     //res.send(`<h1>Welcome to the homepage</h1> ${allAnimals.map(animal => `<p>${animal.name} - ${animal.species}</p>`).join('')}`)
     res.render("home", { allAnimals })
 })
@@ -25,7 +25,7 @@ app.get("/api/animals", async (req, res) => {
 })
 
 async function start() {
-    const client = new MongoClient("mongodb+srv://n31751740:1oK8a9PnWanyKIkO@cluster0.jbxun29.mongodb.net/AmazingMernApp?retryWrites=true&w=majority")
+    const client = new MongoClient("mongodb+srv://n31751740:7Iwgndprcd4JbOSG@cluster0.jbxun29.mongodb.net/AmazingMernApp?retryWrites=true&w=majority")
     await client.connect()
     db = client.db()
     app.listen(3000)
