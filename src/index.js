@@ -21,7 +21,7 @@ function App() {
          <CreateNewForm setAnimals={setAnimals}/>
          <div className="animal-grid"></div>
          {animals.map(function(animal) {
-          return <AnimaCard key={animal.id} name={animal.name} species={animal.species} />
+          return <AnimaCard key={animal.id} name={animal.name} species={animal.species} photo={animal.photo} id={animal._id} setAnimals={setAnimals}/>
          })}
     </div>
   )
